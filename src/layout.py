@@ -1,9 +1,9 @@
 
 import streamlit as st
-from dailytab import generate_example_graph
-from distributiontab import generate_example_pie_chart
-from aitab import generate_example_ai_chat
-from expensecolumn import generate_expense_column
+from tabs.dailytab import generate_example_graph
+from tabs.distributiontab import generate_example_pie_chart
+from tabs.aitab import generate_example_ai_chat
+from tabs.expensecolumn import generate_expense_column
 from expense_manager import ExpenseManager
 
 
