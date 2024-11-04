@@ -7,3 +7,14 @@ services:
       - "8501:8501"
     volumes:
       - ./src:/app/src
+  postgres:
+    image: postgres:15.2-alpine
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=expenses
+    volumes:
+      - db:/var/lib/postgresql/data
+
+volumes:
+  db:

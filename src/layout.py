@@ -18,18 +18,17 @@ def show_layout():
     # Title of Application    
     st.title("Application Title")
 
-    # Create Two Columns - left is one part, right is 3 parts
+    # Create Two Columns - left is 3 parts, right is 5 parts
     col1, col2 = st.columns([3, 5])
 
     # Column 1 - Left most column
     with col1:
-        st.header("Column 1")
-        st.write("This is the left column")
+        st.header("Expenses")
         generate_expense_column()
     
     # Column 2 - Right most column
     with col2:
-        st.header("Column 2")
+        st.header("Visualizations")
 
         # Create Container for Tabs
         with st.container():
