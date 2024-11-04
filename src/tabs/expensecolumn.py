@@ -1,63 +1,45 @@
 import streamlit as st
-from datetime import datetime
 import pandas as pd
 from expense_manager import ExpenseManager
+
+from util.constants import AMOUNT_COL, CATEGORIES, CATEGORY_COL, DATE_COL, TIME_COL, VENDOR_COL
 
 # Create expense manager instance
 expense_manager = ExpenseManager()
 
 def generate_expense_column():
-    st.header("Expense Column")
-
-    if 'entries' not in st.session_state:
-        st.session_state.entries = pd.DataFrame(columns=["Date", "Category", "Description", "Cost"])
-
-    # User input for expense
-    description = st.text_input("Enter Expense")
-
-    # Create columns for category and cost
-    col1, col2, col3 = st.columns([2, 1, 1])
-    with col1:
-        # Create initial date widget
-        initial_date = st.date_input("Select a Date", value=datetime.today())
-    with col2:
-        # User selects category
-        category_options = ["Rent", "Utilities", "Cable", "Internet", "Car", "Insurance"]
-        category = st.selectbox("Select a Category", options=category_options)
-
-    with col3:
-        # User selects cost
-        cost = st.number_input("Enter Cost", min_value=0.0, step=0.01)
-
-    # Submit Button
-    if st.button("Submit"):
-        if description:
-            st.session_state.expense_manager.add_entry(initial_date, category, description, cost)
-            st.success(f"You have Entered: '{description}' in the Category: {category} with a cost of: ${cost} on: {initial_date}")
-        else:
-            st.warning("Please Enter a Description before Submitting")
     
     # Display the entries in a structured layout
     st.subheader("Entries Table")
+    col_config = {
+        DATE_COL: st.column_config.DateColumn(label=DATE_COL),
+        TIME_COL: st.column_config.TimeColumn(label=TIME_COL),
+        CATEGORY_COL: st.column_config.SelectboxColumn(label=CATEGORY_COL, options=CATEGORIES),
+        VENDOR_COL: st.column_config.Column(label=VENDOR_COL),
+        AMOUNT_COL: st.column_config.NumberColumn("Dollar amounts", format="$ %.2f")
+    }
+
     entries = st.session_state.expense_manager.get_entries()
-    if not entries.empty:
-        for index, entry in entries.iterrows():
-            cols = st.columns([2, 2, 2, 2, 1])  # Create columns for description, cost, category, and delete button
-            with cols[0]:
-                st.write(entry["Date"])
-            with cols[1]:
-                st.write(entry["Description"])
-            with cols[2]:
-                st.write(f"${entry['Cost']:.2f}")
-            with cols[3]:
-                st.write(entry["Category"])
-            with cols[4]:
-                if st.button("❌", key=f"delete_{index}"):  # Delete button with a X symbol
-                    st.session_state.expense_manager.delete_entry(index)
-                    st.success(f"Deleted entry: '{entry['Description']}' with cost ${entry['Cost']} in category '{entry['Category']}' on:'{entry['Date']}'.")
-                    st.rerun()
-    else:
-        st.write("No entries available.")
-    
-    #st.subheader("Expense Table")
-    #st.dataframe(st.session_state.entries)
+    editing = st.data_editor(entries, use_container_width=True, column_config=col_config, num_rows="dynamic")
+
+    if st.button("Save"):
+        st.session_state.expense_manager.set_entries(editing)
+        st.success("You have saved your expenses to the database successfully")
+
+    uploaded_file = st.file_uploader("Save work and add from file")
+
+    if uploaded_file is None:
+        st.session_state["file_processed"] = False
+
+    if uploaded_file is not None:
+        if not st.session_state["file_processed"]:
+            with st.spinner("Processing"):
+                st.write(f"Processing {uploaded_file.name}...")
+                df = pd.read_csv(uploaded_file)
+                df[DATE_COL] = pd.to_datetime(df[DATE_COL])
+                df[TIME_COL] = df[DATE_COL].dt.time
+                df[DATE_COL] = df[DATE_COL].dt.date
+                st.session_state.expense_manager.set_entries(editing)
+                st.session_state.expense_manager.add_entries(df)
+                st.success(f"You have uploaded the file {uploaded_file.name}")
+        st.session_state["file_processed"] = True
