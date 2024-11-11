@@ -1,13 +1,18 @@
+"""
+Sets up basic layout
+"""
 
 import streamlit as st
-from tabs.dailytab import generate_example_graph
-from tabs.distributiontab import generate_example_pie_chart
-from tabs.aitab import generate_example_ai_chat
-from tabs.expensecolumn import generate_expense_column
-from expense_manager import ExpenseManager
+from src.tabs.dailytab import generate_example_graph
+from src.tabs.distributiontab import generate_example_pie_chart
+from src.tabs.aitab import generate_example_ai_chat
+from src.tabs.expensecolumn import generate_expense_column
+from src.expense_manager import ExpenseManager
 
 
 def show_layout():
+    """Base display for page
+    """
     # Page Configuration
     st.set_page_config(layout="wide")
 
@@ -15,7 +20,7 @@ def show_layout():
     if 'expense_manager' not in st.session_state:
         st.session_state.expense_manager = ExpenseManager()
 
-    # Title of Application    
+    # Title of Application
     st.title("Application Title")
 
     # Create Two Columns - left is 3 parts, right is 5 parts
@@ -25,7 +30,7 @@ def show_layout():
     with col1:
         st.header("Expenses")
         generate_expense_column()
-    
+
     # Column 2 - Right most column
     with col2:
         st.header("Visualizations")
@@ -46,10 +51,10 @@ def show_layout():
             with tabs[1]:
                 st.write("Content for Distribution Tab")
                 generate_example_graph()
-            
+
             with tabs[2]:
                 st.write("Content for Overall Tab")
-            
+
             with tabs[3]:
                 st.write("Content for AI tab")
                 generate_example_ai_chat()

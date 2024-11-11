@@ -11,6 +11,8 @@ out
 .settings
 .vscode
 .env.local
+.coverage
+htmlcov
 
 # Python
 *.egg-info

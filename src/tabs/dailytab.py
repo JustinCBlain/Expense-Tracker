@@ -1,9 +1,14 @@
+"""Tab for displaying spending over time"""
+
 import streamlit as st
 import matplotlib.pyplot as plt
 import numpy as np
 
 # Example line graph
 def generate_example_graph():
+    """
+    Displays spending over time
+    """
     # Fake data for line graph
     x = np.linspace(0, 10, 100)
     y = np.sin(x)
