@@ -1,14 +1,26 @@
+"""Generates pie/donut charts"""
+
 import streamlit as st
 import plotly.express as px
 
 def generate_example_pie_chart(entries):
+    """Generates charts to display spending categories/vendors/etc
+
+    Args:
+        entries (dataframe): Pandas dataframe to display
+    """
     if not entries.empty:
         # Calculate total cost per category
         category_costs = entries.groupby('Category')['Amount'].sum().reset_index()
         category_costs.columns = ['Category', 'Total Cost']
 
         # Create a pie chart
-        fig = px.pie(category_costs, values='Total Cost', names='Category', title='Expense Distribution by Category')
+        fig = px.pie(
+            category_costs,
+            values='Total Cost',
+            names='Category',
+            title='Expense Distribution by Category'
+        )
 
         # Render the chart in Streamlit
         st.plotly_chart(fig)

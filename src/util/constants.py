@@ -1,3 +1,5 @@
+"""Constants for use in the expense-tracker app"""
+
 SQL_TABLE = "expenses"
 
 DATE_COL = "Date"

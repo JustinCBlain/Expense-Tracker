@@ -1,8 +1,10 @@
-
-from layout import show_layout
+"""Main entrypoint to app"""
+from src.layout import show_layout
 
 def main():
-    # Layout
+    """
+    Displays layout
+    """
     show_layout()
 
 # Run Application
