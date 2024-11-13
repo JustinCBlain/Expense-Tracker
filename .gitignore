@@ -4,6 +4,7 @@
 *.swp
 build
 out
+data
 .DS_Store
 .dockerversions
 .classpath
