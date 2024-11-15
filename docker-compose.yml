@@ -15,6 +15,17 @@ services:
       - POSTGRES_DB=expenses
     volumes:
       - db:/var/lib/postgresql/data
+  ollama-container:
+    image: ollama/ollama:latest
+    ports:
+        - 11434:11434
+    volumes:
+      - ./data/ollama:/root/.ollama
+      - ./scripts/ollama-entrypoint.sh:/entrypoint.sh
+    pull_policy: always
+    tty: true
+    restart: always
+    entrypoint: ["/usr/bin/bash", "/entrypoint.sh"]
 
 volumes:
   db:

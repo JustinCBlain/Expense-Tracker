@@ -35,7 +35,7 @@ The Expense Tracker project aims to develop a user-friendly web app for seamless
 
 ### Run in Docker
 1. Install Docker - https://docs.docker.com/engine/install/
-1. Run `docker compose up -d`
+1. Run `docker compose up -d --build`
 1. Navigate to [Streamlit app](http://localhost:8501/) in your browser
 
 >To watch the app logs, run `docker logs expense-tracker-api-1 --follow`, or run `docker compose up` without the `-d` to tail all containers.
