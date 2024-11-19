@@ -50,7 +50,8 @@ def show_layout():
 
             with tabs[1]:
                 st.write("Content for Distribution Tab")
-                generate_example_graph()
+                entries = st.session_state.expense_manager.get_entries()
+                generate_example_graph(entries)
 
             with tabs[2]:
                 st.write("Content for Overall Tab")
