@@ -21,7 +21,7 @@ def generate_example_pie_chart(entries):
 
     # Convert Amount to numeric if necessary
     entries['Amount'] = pd.to_numeric(entries['Amount'], errors='coerce')
-    
+
     # Drop rows where 'Amount' is NaN
     entries = entries.dropna(subset=['Amount'])
 
@@ -37,7 +37,8 @@ def generate_example_pie_chart(entries):
         return
 
     # Prepare Data for echarts
-    donut_data = [{"name": row['Category'], "value": row['Amount']} for _, row in category_costs.iterrows()]
+    donut_data = [{"name": row['Category'],
+                   "value": row['Amount']} for _, row in category_costs.iterrows()]
 
     # Echarts donut config
     option = {

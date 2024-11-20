@@ -8,10 +8,10 @@ logger = logging.getLogger(__name__)
 
 def stringify_relevant_info():
     """
-    Get and stringify the most recent 75 transactions.
+    Get and stringify the most recent 60 transactions.
     """
     df = st.session_state.expense_manager.get_entries()
-    df = df.sort_values(by="Date").head(75)
+    df = df.sort_values(by="Date").head(60)
     return df.to_string()
 
 
@@ -24,8 +24,14 @@ def generate_response(input_text):
                        base_url="http://ollama-container:11434")
     info = stringify_relevant_info()
 
+    system_template = """
+        You are a helpful financial advisor.
+        These are the last 60 transaction for your mentee: {financial_data}.
+        Be cautious and use exact stats whenever possible to answer their questions.
+    """
+
     template = ChatPromptTemplate([
-        ("system", "You are a helpful financial coach. These are the last 100 transaction for your mentee: {financial_data}. Be cautious and use exact stats whenever possible."),
+        ("system", system_template),
         ("ai", "Hello, what can I help you with today?"),
         ("human", "{user_input}"),
     ])
