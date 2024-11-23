@@ -63,10 +63,10 @@ def generate_example_pie_chart(entries):
                 "name": "Total Cost",
                 "type": "pie",
                 "radius": ["40%", "70%"],
-                "avoidLabelOverlap": True,
+                "avoidLabelOverlap": False,
                 "label": {
-                    "show": False,
-                    "position": "center",
+                    "show": True,
+                    "position": "outside",
                     "formatter": "{b}",
                     "color": "#fff",
                     "fontSize": 20,
@@ -74,7 +74,7 @@ def generate_example_pie_chart(entries):
                 },
                 "emphasis": {
                     "label": {
-                        "show": False,
+                        "show": True,
                         "fontSize": "20",
                         "fontWeight": "bold"
                     }
