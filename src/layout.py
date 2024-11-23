@@ -7,6 +7,7 @@ from src.tabs.dailytab import generate_example_graph
 from src.tabs.distributiontab import generate_example_pie_chart
 from src.tabs.aitab import generate_example_ai_chat
 from src.tabs.expensecolumn import generate_expense_column
+from src.tabs.time_plot import generate_time_plot
 from src.expense_manager import ExpenseManager
 
 
@@ -55,21 +56,23 @@ def show_layout():
             st.subheader("Dashboard Sections")
 
             # Create Tabs
-            tabs = st.tabs(["Daily Trends", "Spending Distribution", "Summary", "AI Insights"])
+            tabs = st.tabs(["Expense Distribution", "Expenses over Time", "Time plot", "AI"])
 
             # Tab Content
             with tabs[0]:
-                # st.write("Content for Daily Tab")
+                st.write("Expense Distribution")
                 entries = st.session_state.expense_manager.get_entries()
                 generate_example_pie_chart(entries)
 
             with tabs[1]:
-                 # st.write("Content for Distribution Tab")
+                st.write("Expenses over Time")
                 entries = st.session_state.expense_manager.get_entries()
                 generate_example_graph(entries)
 
             with tabs[2]:
-                st.write("Content for Overall Tab")
+                st.write("Content for Daily Expense Timelines")
+                entries = st.session_state.expense_manager.get_entries()
+                generate_time_plot(entries)
 
             with tabs[3]:
                 # st.write("Content for AI tab")
