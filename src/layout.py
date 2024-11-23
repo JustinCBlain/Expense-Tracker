@@ -40,7 +40,7 @@ def show_layout():
     st.title("Expense Tracker")
 
     # Create Two Columns - left is 3 parts, right is 5 parts
-    col1, col2 = st.columns([3, 5])
+    col1, col2 = st.columns([4, 4])
 
     # Column 1 - Left most column
     with col1:
@@ -56,23 +56,24 @@ def show_layout():
             st.subheader("Dashboard Sections")
 
             # Create Tabs
-            tabs = st.tabs(["Expense Distribution", "Expenses over Time", "Time plot", "AI"])
+            tabs = st.tabs(["Daily Trends", "Spending Distribution", "Summary", "AI Insights"])
 
             # Tab Content
+
             with tabs[0]:
-                st.write("Expense Distribution")
+                # st.write("Content for Daily Expense Timelines")
+                entries = st.session_state.expense_manager.get_entries()
+                generate_time_plot(entries)
+
+            with tabs[1]:
+                # st.write("Expense Distribution")
                 entries = st.session_state.expense_manager.get_entries()
                 generate_example_pie_chart(entries)
 
-            with tabs[1]:
-                st.write("Expenses over Time")
+            with tabs[2]:
+                # st.write("Expenses over Time")
                 entries = st.session_state.expense_manager.get_entries()
                 generate_example_graph(entries)
-
-            with tabs[2]:
-                st.write("Content for Daily Expense Timelines")
-                entries = st.session_state.expense_manager.get_entries()
-                generate_time_plot(entries)
 
             with tabs[3]:
                 # st.write("Content for AI tab")

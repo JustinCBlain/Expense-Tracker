@@ -10,6 +10,14 @@ def generate_example_pie_chart(entries):
     Args:
         entries (dataframe): Pandas dataframe to display
     """
+
+    streamlit_style = """
+        <style>
+            iframe[title="streamlit_echarts.st_echarts"]{ min-height: 400px;} 
+        </style>
+    """
+    st.markdown(streamlit_style, unsafe_allow_html=True)
+
     if entries.empty:
         st.write("Entries dataframe is empty.")
         return
@@ -45,6 +53,12 @@ def generate_example_pie_chart(entries):
         "title": {
             "text": "Expense Distribution by Category",
             "subtext": "Total Cost",
+            "textStyle": {
+                "color": '#fff'
+            },
+            "subtextStyle": {
+                "color": '#fff'
+            },
             "left": "center"
         },
         "tooltip": {
@@ -56,14 +70,18 @@ def generate_example_pie_chart(entries):
                 "name": "Total Cost",
                 "type": "pie",
                 "radius": ["40%", "70%"],
-                "avoidLabelOverlap": False,
+                "avoidLabelOverlap": True,
                 "label": {
-                    "show": True,
-                    "position": "center"
+                    "show": False,
+                    "position": "center",
+                    "formatter": "{b}",
+                    "color": "#fff",
+                    "fontSize": 20,
+                    "fontWeight": "normal"
                 },
                 "emphasis": {
                     "label": {
-                        "show": True,
+                        "show": False,
                         "fontSize": "20",
                         "fontWeight": "bold"
                     }
