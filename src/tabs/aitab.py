@@ -45,7 +45,7 @@ def generate_response(input_text):
 def generate_example_ai_chat():
     """AI Chatbot placeholder"""
 
-    st.subheader("Chat Box")
+    st.markdown("###### Chat Box")
 
     with st.container():
         if "messages" not in st.session_state:

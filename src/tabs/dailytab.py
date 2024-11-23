@@ -12,6 +12,8 @@ def aggregate_data(df, period):
     :param df: pandas dataframe to aggregate on period
     :param period: string definition of period across which to aggregate
     """
+
+
     if period == "1 day":
         df["Period"] = df["Date"]
     elif period == "1 week":
@@ -37,6 +39,8 @@ def generate_example_graph(entries):
 
     :param entries: expense entries in a pandas dataframe
     """
+    st.markdown("###### Spending Trends Over Time by Category")
+
     entries["Date"] = pd.to_datetime(entries["Date"], errors="coerce")
 
     # Sidebar for filtering

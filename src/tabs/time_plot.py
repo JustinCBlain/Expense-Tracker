@@ -14,7 +14,7 @@ def generate_time_plot(entries):
     :param entries: A Pandas dataframe containing expense data
     """
 
-    st.markdown("##### Daily Expense Timeline with Time as X-Axis")
+    st.markdown("###### Daily Expense Timeline with Time as X-Axis")
 
     with st.container():
         # Ensure Date column is in datetime format
