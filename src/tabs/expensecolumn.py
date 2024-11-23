@@ -13,7 +13,7 @@ def generate_expense_column():
     """Generates the expense column. This includes data manipulation and ingest.
     """
     # Display the entries in a structured layout
-    st.subheader("Entries Table")
+    # st.subheader("Entries Table")
     col_config = {
         DATE_COL: st.column_config.DateColumn(label=DATE_COL),
         TIME_COL: st.column_config.TimeColumn(label=TIME_COL),

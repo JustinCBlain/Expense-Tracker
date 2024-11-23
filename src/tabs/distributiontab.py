@@ -10,6 +10,7 @@ def generate_example_pie_chart(entries):
     Args:
         entries (dataframe): Pandas dataframe to display
     """
+
     if entries.empty:
         st.write("Entries dataframe is empty.")
         return
@@ -45,6 +46,12 @@ def generate_example_pie_chart(entries):
         "title": {
             "text": "Expense Distribution by Category",
             "subtext": "Total Cost",
+            "textStyle": {
+                "color": '#fff'
+            },
+            "subtextStyle": {
+                "color": '#fff'
+            },
             "left": "center"
         },
         "tooltip": {
@@ -59,7 +66,11 @@ def generate_example_pie_chart(entries):
                 "avoidLabelOverlap": False,
                 "label": {
                     "show": True,
-                    "position": "center"
+                    "position": "outside",
+                    "formatter": "{b}",
+                    "color": "#fff",
+                    "fontSize": 20,
+                    "fontWeight": "normal"
                 },
                 "emphasis": {
                     "label": {
