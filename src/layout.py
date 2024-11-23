@@ -24,6 +24,15 @@ def show_layout():
 
     st.write("""
         <style>
+            /* Tab */
+            #tabs-bui3-tabpanel-0 > div[data-testid="stVerticalBlockBorderWrapper"] > div.e1f1d6gn1 > div.stVerticalBlock > div[data-testid="stVerticalBlockBorderWrapper"] {
+                max-height: 500px;
+                overflow-y: auto;
+            }
+            
+            /* echarts to force rendering on tabs */  
+            iframe[title="streamlit_echarts.st_echarts"]{ min-height: 400px;} 
+            
             /* AI Tab Styles */
            #tabs-bui3-tabpanel-3 > div[data-testid="stVerticalBlockBorderWrapper"] > div.e1f1d6gn1 > div.stVerticalBlock > div:last-child {
                 max-height: 500px;

@@ -11,13 +11,6 @@ def generate_example_pie_chart(entries):
         entries (dataframe): Pandas dataframe to display
     """
 
-    streamlit_style = """
-        <style>
-            iframe[title="streamlit_echarts.st_echarts"]{ min-height: 400px;} 
-        </style>
-    """
-    st.markdown(streamlit_style, unsafe_allow_html=True)
-
     if entries.empty:
         st.write("Entries dataframe is empty.")
         return
