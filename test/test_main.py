@@ -11,14 +11,14 @@ def test_layout(my_app):
     """Tests general layout and functionality"""
 
     assert not my_app.exception
-    assert my_app.title[0].value == "Application Title"
+    assert my_app.title[0].value == "Expense Tracker"
 
     # Assert that the first column is "Expenses"
     expense_column = my_app.columns[0]
-    assert expense_column.header[0].value == "Expenses"
+    assert expense_column.subheader[0].value == "Transaction Records"
 
     vis_column = my_app.columns[1]
-    assert vis_column.header[0].value == "Visualizations"
+    assert vis_column.subheader[0].value == "Dashboard Sections"
 
 
 def test_save(my_app):
