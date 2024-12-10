@@ -6,8 +6,10 @@ from src.expense_manager import ExpenseManager
 
 from src.util.constants import AMOUNT_COL, CATEGORIES, CATEGORY_COL, DATE_COL, TIME_COL, VENDOR_COL
 
-# Create expense manager instance
-expense_manager = ExpenseManager()
+# Reference expense manager instance
+if 'expense_manager' not in st.session_state:
+    st.session_state.expense_manager = ExpenseManager()
+expense_manager = st.session_state.expense_manager
 
 def generate_expense_column():
     """Generates the expense column. This includes data manipulation and ingest.
@@ -30,10 +32,6 @@ def generate_expense_column():
         num_rows="dynamic"
     )
 
-    if st.button("Save"):
-        st.session_state.expense_manager.set_entries(editing)
-        st.success("You have saved your expenses to the database successfully")
-
     uploaded_file = st.file_uploader("Save work and add from file")
 
     if uploaded_file is None:
@@ -48,6 +46,11 @@ def generate_expense_column():
                 st.session_state.expense_manager.add_entries(df)
                 st.success(f"You have uploaded the file {uploaded_file.name}")
         st.session_state["file_processed"] = True
+
+    st.session_state.editing = editing
+
+    user_data = f"{st.session_state.username}_data"
+    st.session_state[user_data] = st.session_state.expense_manager.get_entries()
 
 
 def process_file(file_input):

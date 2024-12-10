@@ -3,6 +3,8 @@ Sets up basic layout
 """
 
 import streamlit as st
+
+from src.user_management import navbar
 from src.tabs.dailytab import generate_example_graph
 from src.tabs.distributiontab import generate_example_pie_chart
 from src.tabs.aitab import generate_example_ai_chat
@@ -15,12 +17,6 @@ def show_layout():
     """
     Base display for page
     """
-
-    # Page Configuration
-    st.set_page_config(
-        page_title="Daily Expenses",
-        layout="wide"
-    )
 
     st.write("""
         <style>
@@ -47,6 +43,9 @@ def show_layout():
 
     # Title of Application
     st.title("Expense Tracker")
+
+    # Create Navbar
+    navbar()
 
     # Create Two Columns - left is 3 parts, right is 5 parts
     col1, col2 = st.columns([4, 4])
